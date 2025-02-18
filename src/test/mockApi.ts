@@ -18,8 +18,7 @@ export const mockCryptoData = [
 const mock = new MockAdapter(axios);
 
 export const setupApiMocks = () => {
-  mock.onGet(/\/coins\/markets/).reply(200, mockCryptoData);
-  mock.onGet(/\/simple\/supported_vs_currencies/).reply(200, ['usd', 'eur', 'gbp']);
+  mock.onGet('https://api.coingecko.com/api/v3/coins/markets').reply(200, mockCryptoData);
 };
 
 export const resetApiMocks = () => {
@@ -27,9 +26,9 @@ export const resetApiMocks = () => {
 };
 
 export const setupErrorApiMocks = () => {
-  mock.onGet(/\/coins\/markets/).reply(500);
+  mock.onGet('https://api.coingecko.com/api/v3/coins/markets').reply(500, { error: 'Server error' });
 };
 
 export const setupNetworkErrorMocks = () => {
-  mock.onGet(/\/coins\/markets/).networkError();
+  mock.onGet('https://api.coingecko.com/api/v3/coins/markets').networkError();
 };
