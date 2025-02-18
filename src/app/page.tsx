@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { SearchBar } from "@/components/SearchBar";
-import { CryptoCard } from "@/components/CryptoCard";
-import { CurrencySelector } from "@/components/CurrencySelector";
-import { RecentlyViewed } from "@/components/RecentlyViewed";
-import { DetailView } from "@/components/DetailView";
-import { useCryptoData } from "@/hooks/useCryptoData";
-import { useCurrencyRates } from "@/hooks/useCurrencyRates";
-import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
-import { Cryptocurrency } from "@/lib/types";
-import ErrorState from "@/components/ErrorState";
-import { ErrorBoundary } from "react-error-boundary";
-import { ErrorFallback } from "@/components/ErrorFallback";
-import { LoadingFallback } from "@/components/LoadingFallback";
-import { queryClient } from "@/lib/queryClient";
+import { useState } from 'react';
+import { SearchBar } from '@/components/SearchBar';
+import { CryptoCard } from '@/components/CryptoCard';
+import { CurrencySelector } from '@/components/CurrencySelector';
+import { RecentlyViewed } from '@/components/RecentlyViewed';
+import { DetailView } from '@/components/DetailView';
+import { useCryptoData } from '@/hooks/useCryptoData';
+import { useCurrencyRates } from '@/hooks/useCurrencyRates';
+import { useRecentlyViewed } from '@/hooks/useRecentlyViewed';
+import { Cryptocurrency } from '@/lib/types';
+import ErrorState from '@/components/ErrorState';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorFallback } from '@/components/ErrorFallback';
+import { LoadingFallback } from '@/components/LoadingFallback';
+import { queryClient } from '@/lib/queryClient';
 
 export default function Home() {
-  const [selectedCurrency, setSelectedCurrency] = useState("USD");
+  const [selectedCurrency, setSelectedCurrency] = useState('USD');
   const [selectedCrypto, setSelectedCrypto] = useState<Cryptocurrency | null>(
     null
   );
@@ -29,7 +29,7 @@ export default function Home() {
     refetch: refetchCryptos,
   } = useCryptoData(selectedCurrency.toLowerCase());
 
-  const { data: currencyRates, isLoading: ratesLoading } = useCurrencyRates();
+  const { isLoading: ratesLoading } = useCurrencyRates();
 
   const { recentlyViewed, addToRecentlyViewed } = useRecentlyViewed();
 
@@ -66,11 +66,11 @@ export default function Home() {
       FallbackComponent={ErrorFallback}
       onReset={() => {
         // Reset application state here
-        queryClient.invalidateQueries({ queryKey: ["cryptocurrencies"] });
+        queryClient.invalidateQueries({ queryKey: ['cryptocurrencies'] });
       }}
       onError={(error, info) => {
         // Log to error reporting service (implement your logging logic)
-        console.error("Error caught by boundary:", error, info);
+        console.error('Error caught by boundary:', error, info);
       }}
     >
       <div className="min-h-screen bg-gray-50">

@@ -48,7 +48,7 @@ export const api = {
       // Validate response data
       try {
         return CryptocurrencyArraySchema.parse(response.data);
-      } catch (error: any) {
+      } catch (error: unknown) {
         if (error instanceof z.ZodError) {
           throw new ValidationError(`Invalid data received from API: ${error.message}`);
         }
