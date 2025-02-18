@@ -1,5 +1,10 @@
-import "./globals.css";
-import { Providers } from "./providers";
+import './globals.css';
+import { Providers } from './providers';
+
+export const metadata = {
+  title: 'Crypto Tracker',
+  description: 'Track your favorite cryptocurrencies in real-time',
+};
 
 export default function RootLayout({
   children,
