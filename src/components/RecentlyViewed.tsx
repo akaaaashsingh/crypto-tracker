@@ -1,6 +1,6 @@
-import React from "react";
-import { Cryptocurrency } from "@/lib/types";
-import { CryptoCard } from "./CryptoCard";
+import React from 'react';
+import { Cryptocurrency } from '@/lib/types';
+import { CryptoCard } from './CryptoCard';
 
 interface RecentlyViewedProps {
   items: Cryptocurrency[];

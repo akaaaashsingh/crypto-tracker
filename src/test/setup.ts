@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { resetApiMocks, setupApiMocks } from './mockApi';
+import { setupApiMocks, resetApiMocks } from "@/test/mockApi";
 
 beforeAll(() => {
   setupApiMocks();
@@ -7,4 +7,18 @@ beforeAll(() => {
 
 afterEach(() => {
   resetApiMocks();
+});
+
+const originalError = console.error;
+beforeAll(() => {
+  console.error = (...args) => {
+    if (/Warning/.test(args[0])) {
+      return;
+    }
+    originalError.call(console, ...args);
+  };
+});
+
+afterAll(() => {
+  console.error = originalError;
 });

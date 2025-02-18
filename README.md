@@ -11,6 +11,7 @@ A modern cryptocurrency tracking application built with Next.js and TypeScript t
 - 📊 Detailed view for each cryptocurrency
 - 📝 Recently viewed cryptocurrencies history
 - 📱 Responsive design for all device sizes
+- 📊 Analytics visualisations for the data
 
 ### Technical Features
 
@@ -51,14 +52,22 @@ A modern cryptocurrency tracking application built with Next.js and TypeScript t
 2. npm install
 3. npm run dev
 
-The application will be available at http://localhost:3000
-🏗️ Build for Production
-bashCopynpm run build
+The application will be available at
+
+```bash
+http://localhost:3000
+```
+
+# 🏗️ Build for Production
+
+```bash
+npm run build
 npm start
 🧪 Testing
 Running Tests
 bashCopy# Run all tests
 npm test
+```
 
 # Run tests in watch mode
 
@@ -67,7 +76,8 @@ npm run test:watch
 # Run tests with coverage
 
 npm run test:coverage
-Testing Stack
+
+# Testing Stack
 
 🧪 Jest for test running and assertions
 🔍 React Testing Library for component testing
@@ -85,14 +95,13 @@ The application implements comprehensive error handling:
 ⌛ Loading states and fallbacks
 
 🛠️ Development Features
-Code Quality
 
 📝 ESLint configuration for code quality
 🎨 Prettier for code formatting
 📘 TypeScript for type safety
 🔄 Husky for pre-commit hooks
 
-API Mocking
+# API Mocking
 
 🔄 MSW for API mocking in development
 📊 Realistic data simulation
@@ -101,6 +110,7 @@ API Mocking
 
 📁 Project Structure
 
+```bash
 crypto-tracker/
 ├── src/
 │ ├── app/
@@ -126,9 +136,19 @@ crypto-tracker/
 │ ├── components/
 │ └── hooks/
 └── package.json
+```
 
 📜 Available Scripts
-CommandDescriptionnpm run devStart development servernpm run buildBuild for productionnpm startStart production servernpm testRun testsnpm run lintRun ESLintnpm run formatRun Prettier
+
+```bash
+npm run dev - Start development server
+npm run build - Build for production
+npm start - Start production server
+npm test - Run tests
+npm run lint - Run ESLint
+npm run format - Run Prettier
+```
+
 🤝 Contributing
 
 Fork the repository
