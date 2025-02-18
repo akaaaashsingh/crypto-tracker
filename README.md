@@ -11,6 +11,7 @@ A modern cryptocurrency tracking application built with Next.js and TypeScript t
 - 📊 Detailed view for each cryptocurrency
 - 📝 Recently viewed cryptocurrencies history
 - 📱 Responsive design for all device sizes
+- 📊 Analytics visualisations for the data
 
 ### Technical Features
 
