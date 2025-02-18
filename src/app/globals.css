@@ -19,3 +19,11 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.crypto-card {
+  @apply p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer bg-white;
+}
+
+.loading-spinner {
+  @apply flex items-center justify-center min-h-screen;
+}
