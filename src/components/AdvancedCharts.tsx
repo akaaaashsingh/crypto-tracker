@@ -29,7 +29,6 @@ export const AdvancedCharts: React.FC<AdvancedChartsProps> = ({
   data,
   currency,
 }) => {
-  // Format data for price comparison chart
   const priceData = data.slice(0, 5).map((crypto) => ({
     name: crypto.symbol.toUpperCase(),
     price: crypto.current_price,
@@ -37,7 +36,6 @@ export const AdvancedCharts: React.FC<AdvancedChartsProps> = ({
     volume: crypto.total_volume,
   }));
 
-  // Format data for market dominance pie chart
   const marketCapData = data.slice(0, 5).map((crypto) => ({
     name: crypto.symbol.toUpperCase(),
     value: crypto.market_cap,
@@ -53,7 +51,6 @@ export const AdvancedCharts: React.FC<AdvancedChartsProps> = ({
 
   return (
     <div className="space-y-8">
-      {/* Price Comparison Chart */}
       <div className="bg-white rounded-lg p-4 shadow-sm">
         <h3 className="text-lg font-semibold mb-4">Price Comparison</h3>
         <ResponsiveContainer width="100%" height={300}>
@@ -83,7 +80,6 @@ export const AdvancedCharts: React.FC<AdvancedChartsProps> = ({
         </ResponsiveContainer>
       </div>
 
-      {/* Market Cap Distribution */}
       <div className="bg-white rounded-lg p-4 shadow-sm">
         <h3 className="text-lg font-semibold mb-4">Market Cap Distribution</h3>
         <ResponsiveContainer width="100%" height={300}>
@@ -120,7 +116,6 @@ export const AdvancedCharts: React.FC<AdvancedChartsProps> = ({
         </ResponsiveContainer>
       </div>
 
-      {/* Volume Analysis */}
       <div className="bg-white rounded-lg p-4 shadow-sm">
         <h3 className="text-lg font-semibold mb-4">Trading Volume</h3>
         <ResponsiveContainer width="100%" height={300}>
@@ -150,7 +145,6 @@ export const AdvancedCharts: React.FC<AdvancedChartsProps> = ({
         </ResponsiveContainer>
       </div>
 
-      {/* Market Cap vs Price Area Chart */}
       <div className="bg-white rounded-lg p-4 shadow-sm">
         <h3 className="text-lg font-semibold mb-4">
           Market Cap vs Price Correlation
