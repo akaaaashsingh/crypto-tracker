@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SearchBar } from '@/components/SearchBar';
-import { mockCryptoData } from '@/test/mocks/handlers';
+import { mockCryptoData } from '@/test/mockApi';
 
 describe('SearchBar', () => {
   const mockOnSelect = jest.fn();

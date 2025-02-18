@@ -1,6 +1,10 @@
 import '@testing-library/jest-dom';
-import { server } from './mocks/server';
+import { resetApiMocks, setupApiMocks } from './mockApi';
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+beforeAll(() => {
+  setupApiMocks();
+});
+
+afterEach(() => {
+  resetApiMocks();
+});
