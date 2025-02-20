@@ -14,3 +14,10 @@ export interface CurrencyRate {
   code: string;
   rate: number;
 }
+
+  export const tabs = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'details', label: 'Details' },
+    { id: 'market', label: 'Market Data' },
+    { id: 'exchanges' as const, label: 'Exchanges' }
+  ] as const;
