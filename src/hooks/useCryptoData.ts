@@ -14,5 +14,6 @@ export const useCryptoData = (currency: string) => {
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
     staleTime: 60000,
     refetchInterval: 60000,
+    refetchOnWindowFocus: false,
   });
 };
