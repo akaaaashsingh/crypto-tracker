@@ -10,6 +10,19 @@ export interface Cryptocurrency {
   image: string;
 }
 
+export interface CryptocurrencyDetail {
+  market_data: {
+    ath: Record<string, number>;
+    atl: Record<string, number>;
+    circulating_supply: number;
+    max_supply: number | null;
+    price_change_percentage_1h: number;
+    price_change_percentage_24h: number;
+    price_change_percentage_7d: number;
+    price_change_percentage_30d: number;
+  }
+}
+
 export interface CurrencyRate {
   code: string;
   rate: number;

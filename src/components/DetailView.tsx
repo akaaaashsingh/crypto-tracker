@@ -12,6 +12,9 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { formatPrice } from '@/lib/utils';
+import { useCryptoDetails } from '@/hooks/useCryptoDetails';
+import { useHistoricalData } from '@/hooks/useHistoricalData';
+import Market from './Market';
 
 interface DetailViewProps {
   crypto: Cryptocurrency;
@@ -28,30 +31,13 @@ export const DetailView: React.FC<DetailViewProps> = ({
     'overview' | 'details' | 'market' | 'exchanges'
   >('overview');
 
-  const { data: details, isLoading } = useQuery({
-    queryKey: ['cryptoDetails', crypto.id],
-    queryFn: async () => {
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${crypto.id}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=true`
-      );
-      return response.data;
-    },
-  });
+  const {
+    data: details,
+    isLoading,
+    error,
+  } = useCryptoDetails(crypto.id, currency);
 
-  const { data: historicalData } = useQuery({
-    queryKey: ['cryptoHistory', crypto.id, currency],
-    queryFn: async () => {
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${
-          crypto.id
-        }/market_chart?vs_currency=${currency.toLowerCase()}&days=7&interval=daily`
-      );
-      return response.data.prices.map((item: [number, number]) => ({
-        date: new Date(item[0]).toLocaleDateString(),
-        price: item[1],
-      }));
-    },
-  });
+  const { data: historicalData } = useHistoricalData(crypto.id, currency);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -243,81 +229,7 @@ export const DetailView: React.FC<DetailViewProps> = ({
             )}
 
             {activeTab === 'market' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <h3 className="font-medium text-gray-900">
-                    Price Statistics
-                  </h3>
-                  <div className="space-y-2">
-                    <div className="flex justify-between py-2 border-b">
-                      <span className="text-gray-500">All Time High</span>
-                      <span className="font-medium">
-                        {formatPrice(
-                          details?.market_data?.ath?.[currency.toLowerCase()] ||
-                            0,
-                          currency
-                        )}
-                      </span>
-                    </div>
-                    <div className="flex justify-between py-2 border-b">
-                      <span className="text-gray-500">All Time Low</span>
-                      <span className="font-medium">
-                        {formatPrice(
-                          details?.market_data?.atl?.[currency.toLowerCase()] ||
-                            0,
-                          currency
-                        )}
-                      </span>
-                    </div>
-                    <div className="flex justify-between py-2 border-b">
-                      <span className="text-gray-500">Circulating Supply</span>
-                      <span className="font-medium">
-                        {details?.market_data?.circulating_supply?.toLocaleString()}
-                      </span>
-                    </div>
-                    <div className="flex justify-between py-2 border-b">
-                      <span className="text-gray-500">Max Supply</span>
-                      <span className="font-medium">
-                        {details?.market_data?.max_supply?.toLocaleString() ||
-                          'Unlimited'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="font-medium text-gray-900">Price Changes</h3>
-                  <div className="space-y-2">
-                    {['1h', '24h', '7d', '30d'].map((period) => (
-                      <div
-                        key={period}
-                        className="flex justify-between py-2 border-b"
-                      >
-                        <span className="text-gray-500">
-                          Price Change ({period})
-                        </span>
-                        <span
-                          className={`font-medium ${
-                            details?.market_data?.[
-                              `price_change_percentage_${period}`
-                            ] >= 0
-                              ? 'text-green-600'
-                              : 'text-red-600'
-                          }`}
-                        >
-                          {details?.market_data?.[
-                            `price_change_percentage_${period}`
-                          ]?.toFixed(2)
-                            ? `${details?.market_data?.[
-                                `price_change_percentage_${period}`
-                              ]?.toFixed(2)}%`
-                            : 'N/A'}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <Market details={details} currency={currency} />
             )}
             {activeTab === 'exchanges' && (
               <ExchangeComparison
