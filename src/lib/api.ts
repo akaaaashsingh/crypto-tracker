@@ -22,7 +22,9 @@ const handleAxiosError = (error: AxiosError) => {
     case 404:
       throw new APIError('Cryptocurrency data not found.', statusCode, 'NOT_FOUND');
     case 500:
+      throw new APIError('Internal server error. Please try again later.', statusCode, 'INTERNAL_ERROR');
     case 502:
+      throw new APIError('Bad gateway. Please try again later.', statusCode, 'BAD_GATEWAY');
     case 503:
       throw new APIError('Server error. Please try again later.', statusCode, 'SERVER_ERROR');
     default:
@@ -73,6 +75,23 @@ export const api = {
       }));
     } catch (error) {
       console.error('Error fetching currency rates:', error);
+      throw error;
+    }
+  },
+
+  async getHistoricalData(id: string, currency: string) {
+    try {
+      const response = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${
+          id
+        }/market_chart?vs_currency=${currency.toLowerCase()}&days=7&interval=daily`
+      );
+      return response.data.prices.map((item: [number, number]) => ({
+        date: new Date(item[0]).toLocaleDateString(),
+        price: item[1],
+      }));
+    } catch(error) {
+      console.error('Error fetching historical data:', error);
       throw error;
     }
   },

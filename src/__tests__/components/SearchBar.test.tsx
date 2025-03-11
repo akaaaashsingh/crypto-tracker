@@ -22,7 +22,7 @@ describe('SearchBar', () => {
     const input = screen.getByPlaceholderText('Search cryptocurrencies...');
     await userEvent.type(input, 'bit');
 
-    expect(screen.getByText('Bitcoin (BTC)')).toBeInTheDocument();
+    expect(screen.getByText('Bitcoin')).toBeInTheDocument();
   });
 
   it('calls onSelect when a cryptocurrency is selected', async () => {
@@ -30,7 +30,7 @@ describe('SearchBar', () => {
     const input = screen.getByPlaceholderText('Search cryptocurrencies...');
     await userEvent.type(input, 'bit');
 
-    fireEvent.click(screen.getByText('Bitcoin (BTC)'));
+    fireEvent.click(screen.getByText('Bitcoin'));
     expect(mockOnSelect).toHaveBeenCalledWith(mockCryptoData?.[0]);
   });
 
@@ -39,7 +39,7 @@ describe('SearchBar', () => {
     const input = screen.getByPlaceholderText('Search cryptocurrencies...');
     await userEvent.type(input, 'bit');
 
-    fireEvent.click(screen.getByText('Bitcoin (BTC)'));
+    fireEvent.click(screen.getByText('Bitcoin'));
     expect(input).toHaveValue('');
   });
 });

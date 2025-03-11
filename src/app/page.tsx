@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchBar } from '@/components/SearchBar';
 import { CryptoCard } from '@/components/CryptoCard';
 import { CurrencySelector } from '@/components/CurrencySelector';
@@ -53,6 +53,10 @@ export default function Home() {
     setSelectedCrypto(crypto);
     addToRecentlyViewed(crypto);
   };
+
+  useEffect(() => {
+    document.title = `Crypto Tracker - ${view}`;
+  }, [view]);
 
   const currentCryptos = getPaginatedData(cryptocurrencies);
   const totalPages = cryptocurrencies
